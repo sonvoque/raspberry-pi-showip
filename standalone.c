@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
             char addressBuffer[INET_ADDRSTRLEN];
             inet_ntop(AF_INET, tmpAddrPtr, addressBuffer, INET_ADDRSTRLEN);
             printf("%s IP Address %s\n", ifa->ifa_name, addressBuffer);
-            if (strcmp(ifa->ifa_name, "lo") != 0)
+            if ((strcmp(ifa->ifa_name, "eth0") != 0) || (strcmp(ifa->ifa_name, "wlan0") != 0) )
             {
                 strncpy(ip, addressBuffer, sizeof(ip)-1);
 		    }
@@ -51,6 +51,7 @@ int main(int argc, char *argv[])
     }
     
     // loop ipv6 if we couldnt find ipv4 eth0
+	/*	
     if (ip[0] == '\0') for (ifa = ifAddrStruct; ifa != NULL; ifa = ifa->ifa_next) 
     {
         if (!ifa->ifa_addr) 
@@ -70,6 +71,7 @@ int main(int argc, char *argv[])
 		    }
         } 
     }
+    */
     
     if (ifAddrStruct!=NULL) freeifaddrs(ifAddrStruct);
     
